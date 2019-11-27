@@ -4,17 +4,24 @@ import { getState, actions } from './state';
 import './style.css';
 import { bindActionCreators } from 'redux';
 
-type ReduxProps = ConnectedProps<typeof withRedux>;
-
-interface HomeComponentProps extends ReduxProps {}
-
-const HomeComponent: React.FC<HomeComponentProps> = ({ state, actions }) => {
+const HomeComponent: React.FC<ConnectedProps<typeof withRedux>> = ({
+  state,
+  actions
+}) => {
   return (
     <div className="home">
       <h1>Count: {state}</h1>
 
       <button onClick={actions.inc}>Inc</button>
       <button onClick={actions.dec}>Dec</button>
+      <button
+        onClick={() => {
+          actions.incBy(20);
+        }}
+      >
+        + 20
+      </button>
+      <button onClick={actions.reset}>Reset</button>
     </div>
   );
 };
