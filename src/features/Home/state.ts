@@ -10,3 +10,7 @@ export const { actions, reducer, name } = createSlice({
     dec: (state) => state - 1
   }
 });
+
+export const getState = (state: { home: typeof initialState }) => ({
+  state: state.home
+});

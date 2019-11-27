@@ -6,9 +6,7 @@ import { bindActionCreators } from 'redux';
 
 type ReduxProps = ConnectedProps<typeof withRedux>;
 
-interface HomeComponentProps extends ReduxProps {
-  state: typeof homeState.initialState;
-}
+interface HomeComponentProps extends ReduxProps {}
 
 const HomeComponent: React.FC<HomeComponentProps> = ({ state, actions }) => {
   return (
@@ -21,13 +19,8 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ state, actions }) => {
   );
 };
 
-const withRedux = connect(
-  (state: any) => ({
-    state: state[homeState.name]
-  }),
-  (dispatch) => ({
-    actions: bindActionCreators(homeState.actions, dispatch)
-  })
-);
+const withRedux = connect(homeState.getState, (dispatch) => ({
+  actions: bindActionCreators(homeState.actions, dispatch)
+}));
 
 export const Home = withRedux(HomeComponent);
