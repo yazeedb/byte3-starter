@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import * as homeState from './state';
+import { getState, actions } from './state';
 import './style.css';
 import { bindActionCreators } from 'redux';
 
@@ -19,8 +19,8 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ state, actions }) => {
   );
 };
 
-const withRedux = connect(homeState.getState, (dispatch) => ({
-  actions: bindActionCreators(homeState.actions, dispatch)
+const withRedux = connect(getState, (dispatch) => ({
+  actions: bindActionCreators(actions, dispatch)
 }));
 
 export const Home = withRedux(HomeComponent);
