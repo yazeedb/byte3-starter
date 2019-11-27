@@ -1,23 +1,33 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { actions, getState } from './state';
+import * as homeState from './state';
 import './style.css';
+import { bindActionCreators } from 'redux';
 
 type ReduxProps = ConnectedProps<typeof withRedux>;
 
-interface HomeComponentProps extends ReduxProps {}
+interface HomeComponentProps extends ReduxProps {
+  state: typeof homeState.initialState;
+}
 
-const HomeComponent: React.FC<HomeComponentProps> = (props) => {
+const HomeComponent: React.FC<HomeComponentProps> = ({ state, actions }) => {
   return (
     <div className="home">
-      <h1>Count: {props.home}</h1>
+      <h1>Count: {state}</h1>
 
-      <button onClick={props.inc}>Inc</button>
-      <button onClick={props.dec}>Inc</button>
+      <button onClick={actions.inc}>Inc</button>
+      <button onClick={actions.dec}>Dec</button>
     </div>
   );
 };
 
-const withRedux = connect(getState, actions);
+const withRedux = connect(
+  (state: any) => ({
+    state: state[homeState.name]
+  }),
+  (dispatch) => ({
+    actions: bindActionCreators(homeState.actions, dispatch)
+  })
+);
 
 export const Home = withRedux(HomeComponent);
