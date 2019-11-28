@@ -1,0 +1,34 @@
+.home {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+}
+
+.column {
+  margin-right: 25px;
+}
+
+.column:last-child {
+  margin-right: 0;
+}
+
+.column header {
+  color: white;
+  font-weight: bold;
+}
+
+.first header {
+  background-color: #8e6e95;
+}
+
+.second header {
+  background-color: #39a59c;
+}
+
+.third header {
+  background-color: #344759;
+}
+
+.fourth header {
+  background-color: #e8741e;
+}
